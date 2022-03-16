@@ -41,9 +41,8 @@ router.post('/login', asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   const user = await User.findOne({ email })
-  const passwordCompare = await user.matchPassword(password)
 
-  if (user && passwordCompare) {
+  if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
       email: user.email,
