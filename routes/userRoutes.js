@@ -38,11 +38,12 @@ router.post('/register', asyncHandler(async (req, res) => {
 }))
 
 router.post('/login', asyncHandler(async (req, res) => {
-  const { email } = req.body
+  const { email, password } = req.body
 
   const user = await User.findOne({ email })
+  const passwordCompare = await user.matchPassword(password)
 
-  if (user) {
+  if (user && passwordCompare) {
     res.json({
       _id: user._id,
       email: user.email,
