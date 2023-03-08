@@ -1,18 +1,13 @@
 //All APIS COME HERE
 const express = require('express')
-const User = require('../models/user')
-const router = express.Router()
 const asyncHandler = require('express-async-handler')
+const User = require('../models/user')
 const jsonToken = require('../utils/jsonToken')
-
-
-
+const router = express.Router()
 
 router.post('/register', asyncHandler(async (req, res) => {
 
   const { email, password } = req.body
-
-
   const userExists = await User.findOne({ email })
 
   if (userExists) {
@@ -23,7 +18,6 @@ router.post('/register', asyncHandler(async (req, res) => {
     email,
     password
   })
-
 
   if (user) {
     res.status(201).json({

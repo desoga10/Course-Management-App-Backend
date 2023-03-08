@@ -20,7 +20,7 @@ app.use(morgan("common"))
 app.use('/api', api)
 app.use('/api/course', courseRoutes)
 
-//Connect Mongo DB
+//Allow access to .env file
 dotenv.config()
 
 mongoose.connect(process.env.MONGO_URL, {

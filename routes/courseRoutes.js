@@ -40,13 +40,7 @@ router.post('/add', verifyToken, asyncHandler(async (req, res) => {
 //Update Specific Course
 router.post('/update/:id', verifyToken, asyncHandler(async (req, res) => {
 
-  const {
-    name,
-    link,
-    platform,
-    description,
-    isCompleted
-  } = req.body;
+  const { name, link, platform, description, isCompleted } = req.body;
 
   const course = await Course.findById(req.params.id);
 
@@ -56,7 +50,6 @@ router.post('/update/:id', verifyToken, asyncHandler(async (req, res) => {
     course.platform = platform;
     course.description = description;
     course.isCompleted = isCompleted;
-
 
     const updatedCourse = await course.save();
 
